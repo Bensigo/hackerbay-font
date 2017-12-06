@@ -3,20 +3,29 @@ import './App.css';
 
 import Square from './components/Square'
 import Player from './components/Player'
+import Enemy from './components/Enemy'
 
 
 class Board extends Component {
+
+  count = 0
+
+  // setting app state for squares and player style
   state = {
     playerStyle: {
       top: 40,
       left: 0,
       position: 'relative'
-    }
+    },
+    
+    
   }
+
   renderSquare =  (i) => {
     // return a square 
     return <Square  value={i}/>
   }
+
   handleKeyDown = (e) => {
     // check for up down left and right key press down
     // then move the player base on key press
@@ -76,13 +85,13 @@ class Board extends Component {
     
   }
   render() {
-    const arr = [1, 2,3,4,5,6,7,8,9,10]
+    const row = [1, 2,3,4,5,6,7,8,9,10]
     return (
       <div className='board'>
        <Player onKeyDown= {e => {this.handleKeyDown(e)}} style={this.state.playerStyle}/>
-       {arr.map((item, i) => {
+       {row.map((item, i) => {
          return(
-          <div className='board-row' key={i}>
+          <div className='board-row' key={i} >
           {this.renderSquare(1)}
           {this.renderSquare(2)}
           {this.renderSquare(3)}
@@ -97,7 +106,9 @@ class Board extends Component {
          )
          })
        }
-        
+       <Enemy />
+       <Enemy />
+       <Enemy />
       </div> 
     );
   }
