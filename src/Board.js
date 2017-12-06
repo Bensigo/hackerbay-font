@@ -5,6 +5,12 @@ import Square from './components/Square'
 import Player from './components/Player'
 import Enemy from './components/Enemy'
 
+function generateRandomNum () {
+  console.log('generating randon num')
+  return Math.floor(Math.random() * 340)
+}
+const row = generateRandomNum()
+const col = generateRandomNum()
 
 class Board extends Component {
 
@@ -20,13 +26,16 @@ class Board extends Component {
     
     
   }
-
+ 
   renderSquare =  (i) => {
     // return a square 
     return <Square  value={i}/>
   }
-
-  handleKeyDown = (e) => {
+  renderEnemy = () => {
+    
+    return <Enemy row={row} col={col} />
+  }
+  handleKeyUp = (e) => {
     // check for up down left and right key press down
     // then move the player base on key press
     console.log(e.keyCode)
@@ -85,11 +94,16 @@ class Board extends Component {
     
   }
   render() {
-    const row = [1, 2,3,4,5,6,7,8,9,10]
+    
+
+    const arr = [1, 2,3,4,5,6,7,8,9,10]
     return (
       <div className='board'>
-       <Player onKeyDown= {e => {this.handleKeyDown(e)}} style={this.state.playerStyle}/>
-       {row.map((item, i) => {
+       {this.renderEnemy()}
+       {this.renderEnemy()}
+       {this.renderEnemy()}
+       <Player onKeyUp= {e => {this.handleKeyUp(e)}} style={this.state.playerStyle}/>
+       {arr.map((item, i) => {
          return(
           <div className='board-row' key={i} >
           {this.renderSquare(1)}
@@ -106,9 +120,6 @@ class Board extends Component {
          )
          })
        }
-       <Enemy />
-       <Enemy />
-       <Enemy />
       </div> 
     );
   }

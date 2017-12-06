@@ -1,9 +1,14 @@
 import React from 'react'
 
-export default () => {
+export default ({row, col}) => {
+  const style = {
+    top: col,
+    left: row,
+    position: 'fixed'
+  }
   return (
     <div >
-      <div src='' style={{backgroundColor: 'red'}}  className='player enemy'/ >
+      <div  style={{...style, backgroundColor: 'red'}}  className='player enemy'/ >
     </div>
   )
 }
